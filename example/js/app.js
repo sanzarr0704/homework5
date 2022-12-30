@@ -102,42 +102,47 @@ const  message = {
 
 const form = document.querySelector("form")
 
-const  postData = (form) => {
-    form.addEventListener("sumbit", (e)=>{
+const postData = (url,data) => {
+    const res = fetch(url, {
+        method: "POST",
+        headers:{"Content-type": "application/json"},
+        body: data
+    })
+    return res
+}
+
+const  binPostData = (form) => {
+    form.addEventListener("sumbit", (e) => {
         e.preventDefault()
 
-          const request = new XMLHttpRequest()
-    request.open("POST" , "server.php")
-    request.setRequestHeader("Content-type"  , "application/json")
 
-    const  formData = new FormData(form)
-    const object = {}
+        const formData = new FormData(form)
+        const object = {}
 
-    formData.forEach((item) => {
-        obj[i] = item
-    })
-    console.log(object)
+        formData.forEach((item) => {
+            obj[i] = item
+        })
 
         const json = JSON.stringify(object)
 
-        request.send(json)
 
-          request.addEventListener("load", ()=>{
-              if (request.status === 200){
-                  console.log("ok")
-                  messageBlock.textContent = message.success
-              } else {
-                  console.log("not ok")
-                   messageBlock.textContent = message.fail
-              }
-          })
+        forms.forEach((item) => {
+            binPostData(item)
+        })
+
+
+        postData("server.php", json)
+            .then((data) => console.log(data.status))
+            .catch((e) => console.error(e))
+            .finally(() => console.warn("finally"))
+
+        fetch('http://jsonplaceholder.typicode.com/todos/89')
+            .then(response => response.json())
+            .then(json => console.log(json))
+            .catch(() => console.error("error"))
+            .finally(() => console.warn("finally"))
     })
 }
-
-
-
-
-
 
 
 
@@ -151,15 +156,15 @@ const closeModalBtn2 = document.querySelector(".modal__close")
 let isModalOpened2 = false
 
 const openModal2 = () => {
-    modal.classList.add("show")
-    modal.classList.remove("hide")
+    modal2.classList.add("show")
+    modal2.classList.remove("hide")
     document.body.style.overflow = "hidden"
 }
 
-modalTrigger2.addEventListener("click", openModal)
+modalTrigger2.addEventListener("click", openModal2)
 
 const closeModal2 = () => {
-    modal.classList.add("hide")
+    modal2.classList.add("hide")
     modal.classList.remove("show")
     document.body.style.overflow = ""
 }
@@ -187,37 +192,48 @@ const  message2 = {
 
 const form2 = document.querySelector("form")
 
-const  postData2 = (form) => {
-    form.addEventListener("sumbit", (e)=>{
+const postData2 = (url,data) => {
+    const res2 = fetch(url, {
+        method: "POST",
+        headers:{"Content-type": "application/json"},
+        body: data
+    })
+    return res2
+}
+
+const  binPostData2 = (form) => {
+    form.addEventListener("sumbit", (e) => {
         e.preventDefault()
 
-          const request = new XMLHttpRequest()
-    request.open("POST" , "server.php")
-    request.setRequestHeader("Content-type"  , "application/json")
 
-    const  formData = new FormData(form)
-    const object = {}
+        const formData2 = new FormData(form)
+        const object = {}
 
-    formData.forEach((item) => {
-        obj[i] = item
-    })
-    console.log(object)
+        formData2.forEach((item) => {
+            obj[i] = item
+        })
 
         const json = JSON.stringify(object)
 
-        request.send(json)
 
-          request.addEventListener("load", ()=>{
-              if (request.status === 200){
-                  console.log("ok")
-                  messageBlock.textContent = message.success
-              } else {
-                  console.log("not ok")
-                   messageBlock.textContent = message.fail
-              }
-          })
+        forms.forEach((item) => {
+            binPostData2(item)
+        })
+
+
+        postData2("server.php", json)
+            .then((data) => console.log(data.status))
+            .catch((e) => console.error(e))
+            .finally(() => console.warn("finally"))
+
+        fetch('http://jsonplaceholder.typicode.com/todos/89')
+            .then(response => response.json())
+            .then(json => console.log(json))
+            .catch(() => console.error("error"))
+            .finally(() => console.warn("finally"))
     })
 }
+
 
 
 
